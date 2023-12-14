@@ -1,0 +1,14 @@
+{
+  "name": "jdbc-sink-connector-5",
+  "config": {
+    "connector.class": "io.confluent.connect.jdbc.JdbcSourceConnector",
+	"key.converter": "org.apache.kafka.connect.json.JsonConverter",
+	"value.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "topics": "kafka_test",
+    "connection.url": "jdbc:postgresql://localhost:5432/dvdrental",
+    "connection.user": "postgres",
+    "connection.password": "Welcome01",
+    "insert.mode.databaselevel": true,
+    "table.name.format": "public.customer"
+  }
+}
