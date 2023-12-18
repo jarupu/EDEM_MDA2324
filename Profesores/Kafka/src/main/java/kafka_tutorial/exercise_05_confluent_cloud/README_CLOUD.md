@@ -121,3 +121,39 @@ key = 97, value = test message - 388
 key = 98, value = test message - 392
 key = 99, value = test message - 396
 ```
+
+
+{
+"name": "sourcePostgresql",
+"config":{
+"connector.class": "io.confluent.connect.jdbc.JdbcSourceConnector",
+"task.max": "1",
+"connection.url": "jdbc:postgresql://postgres:5432/postgres",
+"connection.user": "postgres",
+"connection.password": "Welcome01",
+"topic.prefix": "xflight",
+"validate.none.null": "false",
+"mode": "incrementing",
+"incrementing.column.name": "id",
+"table.whitelist": "aeroplane"
+}
+}
+
+
+{
+"name": "conectorSink",
+"config":{
+"connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
+"connection.url": "jdbc:postgresql://localhost:5432/dvdrental",
+"connection.user": "postgres",
+"connection.password": "Welcome01",
+"topics": "test1",
+"insert.mode": "UPSERT",
+"db.timezone": "UTC",
+"auto.create": "true",
+"auto.evolve": "true",
+"pk.mode": "record_value",
+"pk.fields": "customer_id",
+"tasks.max": "1"
+}
+}

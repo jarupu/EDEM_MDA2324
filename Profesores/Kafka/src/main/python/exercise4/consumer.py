@@ -1,53 +1,39 @@
-from kafka import KafkaConsumer
-from json import loads
+from confluent_kafka import Consumer, KafkaError
 
-# # List of available Kafka brokers
-# brokers = ["localhost:9092"]
-# # brokers = ["localhost:9092", "localhost:9093"]
+# Configuración del consumidor
+config = {
+    'bootstrap.servers': 'localhost:9092',  
+    'group.id': 'python-consumer-group',
+    'auto.offset.reset': 'earliest'  
+}
 
-# # Create a Kafka consumer instance with necessary configurations
-# consumer = KafkaConsumer(
-#     'myTopic',
-#     bootstrap_servers=brokers,
-#     auto_offset_reset='earliest',      # start reading from the beginning of the topic
-#     enable_auto_commit=True,
-#     group_id='my-group',
-#     value_deserializer=lambda x: loads(x.decode('utf-8'))
-# )
+# Crear un consumidor
+consumer = Consumer(config)
 
-# print("Start Kafka Consumer")
+# Suscribirse a un tópico
+topic = 'ventas'  # El nombre del tópico
+consumer.subscribe([topic])
 
-# # Start consuming messages
-# for message in consumer:
-#     print(f"Received message: {message.value} with key: {message.key.decode('utf-8')}")
-
-from confluent_kafka import Consumer
-
-
-def read_ccloud_config(config_file):
-    conf = {}
-    with open(config_file) as fh:
-        for line in fh:
-            line = line.strip()
-            if len(line) != 0 and line[0] != "#":
-                parameter, value = line.strip().split('=', 1)
-                conf[parameter] = value.strip()
-    return conf
-
-
-props = read_ccloud_config("client.properties")
-props["group.id"] = "python-group-1"
-props["auto.offset.reset"] = "earliest"
-
-consumer = Consumer(props)
-consumer.subscribe(["topic_0"])
-
+# Loop infinito de consumo de mensajes del topic
 try:
     while True:
-        msg = consumer.poll(1.0)
-        if msg is not None and msg.error() is None:
-            print("key = {key:12} value = {value:12}".format(key=msg.key().decode('utf-8'), value=msg.value().decode('utf-8')))
+        msg = consumer.poll(1.0)  # Lee nuevos mensajes cada 1 segundo
+        
+        if msg is None:
+            continue
+        if msg.error():
+            if msg.error().code() == KafkaError._PARTITION_EOF:
+                print("No hay más mensajes en esta partición.")
+            else:
+                print("Error al recibir mensaje: {}".format(msg.error()))
+        else:
+            # Procesar el mensaje recibido. Aqui solo lo mostramos por pantall. En una App real se pueden hacer cualquier
+            # cosa con un mensaje. Ejmplos: Filtrarlo, modificarlo, guardarlo en una base de datos, 
+            #enviarlo a otra applicación, etc.
+            print('Nuevo mensaje: {}'.format(msg.value().decode('utf-8')))
+
 except KeyboardInterrupt:
     pass
 finally:
+    # Cerrar el consumidor al parar la Applicacion Python
     consumer.close()

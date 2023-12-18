@@ -1,8 +1,6 @@
-import time
 from json import dumps
-# from kafka import KafkaProducer
-
 from confluent_kafka import Producer
+import time
 
 
 
@@ -18,13 +16,13 @@ def read_ccloud_config(config_file):
 
 
 
-producer = Producer(read_ccloud_config("client.properties"))
+producer = Producer(read_ccloud_config("exercise3/client.properties"))
 
 
 # Send 100 messages where the key is the index and the message to send is "test message - index"
 # the topic name is myTopic
 
-topic_kafka = 'topic_0'
+topic_kafka = 'topic_python'
 
 for e in range(100):
     data = {'New message - ': e*4}
@@ -33,7 +31,7 @@ for e in range(100):
     key = str(e).encode('utf-8')
     producer.produce(topic=topic_kafka, value=data_bytes, key=key)  # Send bytes
     print("Sending data: {} to topic {}".format(data, topic_kafka))
-    #time.sleep(1)
+    time.sleep(3)
 
 # After your loop where you send messages:
 producer.flush()

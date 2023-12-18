@@ -1,39 +1,30 @@
 import time
 from json import dumps
-# from kafka import KafkaProducer
-
 from confluent_kafka import Producer
 
+# Configuración del productor
+config = {
+    'bootstrap.servers': 'localhost:9092',  # Cambia esto con la dirección de tu servidor Kafka
+    'client.id': 'python-producer'
+}
 
-
-def read_ccloud_config(config_file):
-    conf = {}
-    with open(config_file) as fh:
-        for line in fh:
-            line = line.strip()
-            if len(line) != 0 and line[0] != "#":
-                parameter, value = line.strip().split('=', 1)
-                conf[parameter] = value.strip()
-    return conf
-
-
-
-producer = Producer(read_ccloud_config("client.properties"))
+# Crear un productor
+producer = Producer(config)
 
 
 # Send 100 messages where the key is the index and the message to send is "test message - index"
 # the topic name is myTopic
 
-topic_kafka = 'topic_0'
+topic_kafka = 'ventas'
 
 for e in range(100):
-    data = {'New message - ': e*4}
+    data = {'Nueva Venta - ': e*4}
     data_str = dumps(data)  # Serialize dictionary to a string
     data_bytes = data_str.encode('utf-8')  # Encode string to bytes
     key = str(e).encode('utf-8')
     producer.produce(topic=topic_kafka, value=data_bytes, key=key)  # Send bytes
     print("Sending data: {} to topic {}".format(data, topic_kafka))
-    #time.sleep(1)
+    time.sleep(1)
 
 # After your loop where you send messages:
 producer.flush()
