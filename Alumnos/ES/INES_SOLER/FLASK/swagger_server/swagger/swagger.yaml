@@ -1,0 +1,97 @@
+---
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: "SENSOR DEL ROBOT"
+host: "localhost:8080"
+basePath: "/v2"
+tags:
+- name: "sensor"
+  description: "Todo sobre la temperatura de tu robot"
+schemes:
+- "https"
+paths:
+  /LastMeasureBySensor/{id_sensor}:
+    get:
+      tags:
+      - "sensor"
+      summary: ""
+      description: "Consultar el último registro de un sensor."
+      operationId: "get_last_meassure_by_sensor"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id_sensor"
+        in: "path"
+        description: "ID del sensor a consultar."
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/sensor"
+        "400":
+          description: "Sensor not found"
+        "404":
+          description: "Invalid ID supplied"
+      x-swagger-router-controller: "swagger_server.controllers.sensor_controller"
+  /postLastMeasureBySensor:
+    post:
+      tags:
+      - "sensor"
+      summary: "Añadir nuevo registro"
+      description: ""
+      operationId: "post_last_measure_by_sensor"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id_sensor"
+        in: "query"
+        description: "ID del sensor"
+        required: true
+        type: "string"
+      - name: "fechamuestreo"
+        in: "query"
+        description: "Fecha de cuando se tomó la muestra"
+        required: true
+        type: "string"
+      - name: "unidad"
+        in: "query"
+        description: "Unidad de medida"
+        required: true
+        type: "string"
+      - name: "medicion"
+        in: "query"
+        description: "Tempeatura del sensor"
+        required: true
+        type: "number"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/sensor"
+        "404":
+          description: "Invalid input supplied"
+      x-swagger-router-controller: "swagger_server.controllers.sensor_controller"
+definitions:
+  sensor:
+    type: "object"
+    properties:
+      id_sensor:
+        type: "string"
+      fechamuestreo:
+        type: "string"
+        example: "10-01-2024"
+      unidad:
+        type: "string"
+      medicion:
+        type: "number"
+    example:
+      id_sensor:
+      - "ABC11"
+      fechamuestreo: "10-01-2024"
+      unidad: "Celsius"
+      medicion: 19.5

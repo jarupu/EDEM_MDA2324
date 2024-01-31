@@ -1,0 +1,113 @@
+openapi: 3.0.3
+info:
+  title: Temperature Measurement
+  description: This API provides real-time temperature measurements from a sensor
+    attached to the main robot in our company.
+  version: 1.0.0
+servers:
+- url: /
+paths:
+  /postTestTemperature:
+    post:
+      tags:
+        - "Sensor"
+      summary: "Add test temperature"
+      description: "Add the test temperature captured by a sensor."
+      operationId: "addTemperature"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code:
+                  type: string
+                  description: ID of the sensor
+                  example: 12ABWZ89
+                fechamuestreo:
+                  type: string
+                  description: Sampling date
+                  example: 2024-01-10T12:34:56Z
+                unidad:
+                  type: string
+                  description: Unit of measurement
+                  example: Celsius
+                  enum:
+                    - Celsius
+                    - Fahrenheit
+                    - Kelvin
+                medicion:
+                  type: number
+                  description: Temperature measurement
+                  example: 18.44
+      responses:
+        '200':
+          description: Successful operation
+
+  /getLastMeassureBySensor/{sensorID}:
+    get:
+      tags:
+      - Sensor
+      summary: Get the temperature of the robot
+      operationId: get_temperature
+      parameters:
+      - name: sensorID
+        in: path
+        description: sensor ID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Measure'
+        "400":
+          description: Sensor not found
+          content:
+            application/json:
+              example:
+                error: Sensor not found
+        "404":
+          description: Invalid ID supplied
+          content:
+            application/json:
+              example:
+                error: Invalid ID supplied
+      x-openapi-router-controller: swagger_server.controllers.sensor_controller
+
+components:
+  schemas:
+    Measure:
+      type: object
+      properties:
+        code:
+          type: string
+          description: ID of the sensor
+          example: 12ABWZ89
+        fechamuestreo:
+          type: string
+          description: Sampling date
+          example: 2024-01-10T12:34:56Z
+        unidad:
+          type: string
+          description: Unit of measurement
+          example: Celsius
+          enum:
+          - Celsius
+          - Fahrenheit
+          - Kelvin
+        medicion:
+          type: number
+          description: Temperature measurement
+          example: 18.44
+      example:
+        code: 12ABWZ89
+        fechamuestreo: '2024-01-10T12:34:56Z'
+        unidad: Celsius
+        medicion: 18.44

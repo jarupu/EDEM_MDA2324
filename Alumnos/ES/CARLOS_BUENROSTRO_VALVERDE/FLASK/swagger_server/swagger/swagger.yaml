@@ -1,0 +1,59 @@
+openapi: 3.0.0
+info:
+  title: Robot Temperature Monitoring API
+  description: The Robot Temperature Monitoring API is a specialized interface that
+    facilitates the retrieval of temperature measurements recorded by sensors installed
+    on robots.Allowing external applications or systems to access and integrate real-time
+    or historical temperature data collected
+  version: 1.0.0
+servers:
+- url: /
+paths:
+  /getLastMeasureBySensor/{sensor}:
+    get:
+      summary: Get the last temperature measurement for a specific sensor.
+      operationId: get_last_measure_by_sensor_sensor_get
+      parameters:
+      - name: sensor
+        in: path
+        description: The ID of the sensor
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Measure'
+        "400":
+          description: Sensor not found
+        "404":
+          description: Invalid ID supplied
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+components:
+  schemas:
+    Measure:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Sensor ID
+        fechamuestreo:
+          type: string
+          description: Timestamp
+        unidad:
+          type: string
+          description: Unit of measurement
+        medicion:
+          type: number
+          description: Celsius
+      example:
+        unidad: unidad
+        medicion: 0.80082819046101150206595775671303272247314453125
+        code: code
+        fechamuestreo: fechamuestreo
+

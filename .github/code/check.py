@@ -16,6 +16,8 @@ def check_class(folder_path):
             for element in deliverables:
                 #print(file_path+"/"+element)
                 if (os.path.exists(file_path+"/"+element) & os.path.isdir(file_path+"/"+element)) or (os.path.exists(file_path+"/"+element.capitalize()) & os.path.isdir(file_path+"/"+element.capitalize())):
+                    if "Pending" in os.listdir(file_path+"/"+element) or "pending" in os.listdir(file_path+"/"+element):
+                        alumnos[alumno][element]=False
                     alumnos[alumno][element]=True    
                 else:
                     alumnos[alumno][element]=False

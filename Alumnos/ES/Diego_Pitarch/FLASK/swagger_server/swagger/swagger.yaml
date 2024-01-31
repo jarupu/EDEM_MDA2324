@@ -1,0 +1,57 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Robot Temperature API
+  description: |
+    Esta API proporciona métodos para obtener información sobre la temperatura de un robot industrial, incluyendo la última medición realizada por un sensor específico.
+
+paths:
+  /getLastMeassureBySensor/{sensor}:
+    get:
+      summary: Obtener la última medición por sensor
+      description: |
+        Este método obtiene la última medición de temperatura asociada a un sensor específico del robot.
+      parameters:
+        - name: sensor
+          in: path
+          description: ID del sensor
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Éxito - Devuelve la última medición
+          schema:
+            type: object
+            properties:
+              code:
+                type: string
+                description: Código único asociado al ID del sensor
+              fechamuestreo:
+                type: string
+                description: Fecha y hora de la medición
+              unidad:
+                type: string
+                description: Unidad de medida de la temperatura
+              medicion:
+                type: number
+                description: Valor numérico de la medición de temperatura
+        '404':
+          description: ID no válido suministrado
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Invalid ID supplied
+                description: Mensaje de error cuando el ID suministrado no es válido
+        '400':
+          description: Sensor no encontrado
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Sensor not found
+                description: Mensaje de error cuando el sensor no es encontrado
+
+

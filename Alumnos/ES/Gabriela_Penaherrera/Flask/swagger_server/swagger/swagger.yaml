@@ -1,0 +1,63 @@
+---
+swagger: "2.0"
+info:
+  description: "Monitoreando la temperatura en tiempo real"
+  version: "1.0.0"
+  title: "Medición de Temperatura"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "temperatura@swagger.io"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "sensores.swagger.io"
+basePath: "/v1"
+tags:
+- name: "Sensores"
+  description: "Todo acerca de nuestros sensores, casos de éxitos en las empresas"
+  externalDocs:
+    url: "http://swagger.io"
+schemes:
+- "https"
+paths:
+  /getLastMeassureBySensor/{sensor}:
+    get:
+      tags:
+      - "sensor"
+      summary: "Obten la última medición de temperatura por el Sensor ID"
+      description: "Devuelve la última medición guardada de temperatura indicado por\
+        \ el Sensor ID"
+      operationId: "get_last_meassure_by_sensor_sensor_get"
+      parameters:
+      - name: "sensor"
+        in: "path"
+        description: "ID del sensor"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "Con éxito"
+          schema:
+            $ref: "#/definitions/Medición"
+        "400":
+          description: "Sensor no encontrado"
+        "404":
+          description: "ID Sensor Inválido"
+      x-swagger-router-controller: "swagger_server.controllers.sensor_controller"
+definitions:
+  Medición:
+    type: "object"
+    properties:
+      id_sensor:
+        type: "string"
+      fecha_muestreo:
+        type: "string"
+      unidad:
+        type: "string"
+      medicion:
+        type: "number"
+    example:
+      unidad: "unidad"
+      fecha_muestreo: "fecha_muestreo"
+      medicion: 0.80082819046101150206595775671303272247314453125
+      id_sensor: "id_sensor"

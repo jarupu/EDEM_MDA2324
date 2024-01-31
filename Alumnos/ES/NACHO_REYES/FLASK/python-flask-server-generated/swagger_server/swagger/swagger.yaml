@@ -1,0 +1,94 @@
+openapi: 3.0.3
+info:
+  title: Swagger Industry Reyes'Robot - OpenAPI 3.0
+  description: Imagine que trabaja en una empresa industrial donde hay un robot. Tenemos
+    un sensor que controla la temperatura del robot en tiempo real. La medición se
+    guarda en una base de datos. Información del sensor;
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.11
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+- url: https://petstore3.swagger.io/api/v3
+tags:
+- name: robot
+  description: Robot characteristics
+  externalDocs:
+    description: Find out more
+    url: http://swagger.io
+paths:
+  /robot/getLastMeassureBySensor:
+    get:
+      tags:
+      - robot
+      summary: Robot output
+      description: Multiple status values can be provided with comma separated strings
+      operationId: get_last_meassure_by_sensor
+      parameters:
+      - name: status
+        in: query
+        description: Status values that need to be considered for filter
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          default: available
+          enum:
+          - available
+          - pending
+          - sold
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Robot'
+                x-content-type: application/json
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Robot'
+        "400":
+          description: Sensor not found
+        "404":
+          description: Invalid ID supplied
+      x-openapi-router-controller: swagger_server.controllers.robot_controller
+components:
+  schemas:
+    Robot:
+      required:
+      - name
+      type: object
+      properties:
+        id:
+          type: string
+          example: "10"
+        fechamuestreo:
+          type: string
+          example: 12/01/2024
+        unidad:
+          type: string
+          example: mega
+        medicion:
+          type: number
+          format: int64
+          example: 24
+      example:
+        unidad: mega
+        medicion: 24
+        fechamuestreo: 12/01/2024
+        id: "10"
+      xml:
+        name: pet
+

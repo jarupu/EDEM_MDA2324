@@ -1,0 +1,38 @@
+openapi: 3.0.0
+info:
+  title: API del Sensor de Temperatura del Robot
+  version: 1.0.0
+paths:
+  /getLastMeassureBySensor/{sensor}:
+    parameters:
+      - name: sensor
+        in: path
+        required: true
+        description: ID del sensor
+        schema:
+          type: string
+    get:
+      summary: Obtener la última medición por sensor
+      operationId: getLastMeasurement
+      responses:
+        '200':
+          description: Respuesta exitosa
+          content:
+            application/json:
+              example:
+                code: "sensor_id"
+                fechamuestreo: "2024-01-14T12:34:56Z"
+                unidad: "Celsius"
+                medicion: 25.5
+        '400':
+          description: Sensor no encontrado
+          content:
+            application/json:
+              example:
+                error: Sensor no encontrado
+        '404':
+          description: ID no válido suministrado
+          content:
+            application/json:
+              example:
+                error: ID no válido suministrado

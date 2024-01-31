@@ -1,0 +1,48 @@
+version: "3"
+
+services:
+    
+  mongo:
+    image: mongo
+    restart: always
+    ports:
+      - 27017:27017    
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+
+#credentials. admin, pass
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: example
+      ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
+
+#### CREAR CONTAINER CON NUESTRO PY
+
+  insert_data:
+    build:
+      context: .
+      dockerfile: Dockerfile  
+    depends_on:
+      - mongo
+
+#### METER JUPYTER
+
+  jupyter:
+    image: jupyter/datascience-notebook
+    restart: always
+    ports:
+      - 8888:8888
+    volumes:
+      - ./visualization.ipynb:/home/jovyan/work/visualization.ipynb
+    depends_on:
+      - mongo
+    environment:
+      JUPYTER_ENABLE_LAB: "yes"
+      JUPYTER_TOKEN: "tu_token_secreto"
+      MONGO_URI: "mongodb://root:example@mongo:27017/jackypepe"
