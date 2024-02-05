@@ -67,3 +67,17 @@
 /Alumnos/ES/*/CLOUD/** @a10pepo @jabrio
 /Alumnos/ES/*/Cloud/** @a10pepo @jabrio
 /Alumnos/ES/*/cloud/** @a10pepo @jabrio
+
+/Alumnos/FS/*/devsecops/** @a10pepo @iasinDev
+/Alumnos/FS/*/DevSecOps/** @a10pepo @iasinDev
+/Alumnos/ES/*/devsecops/** @a10pepo @iasinDev
+/Alumnos/ES/*/DevSecOps/** @a10pepo @iasinDev
+/Alumnos/FS/*/DEVSECOPS/** @a10pepo @iasinDev
+/Alumnos/ES/*/DEVSECOPS/** @a10pepo @iasinDev
+
+/Alumnos/FS/*/TERRAFORM/** @a10pepo @iasinDev
+/Alumnos/FS/*/Terraform/** @a10pepo @iasinDev
+/Alumnos/ES/*/TERRAFORM/** @a10pepo @iasinDev
+/Alumnos/ES/*/Terraform/** @a10pepo @iasinDev
+/Alumnos/FS/*/terraform/** @a10pepo @iasinDev
+/Alumnos/ES/*/terraform/** @a10pepo @iasinDev

@@ -2,8 +2,9 @@ import os
 
 
 
-deliverables=["DOCKER","PYTHON","LINUX","NOTEBOOKS","AHORCADO","SQL","FLASK","KAFKA","SPARK"]
-allowed=["DOCKER","PYTHON","LINUX","NOTEBOOKS","AHORCADO","SQL","README.MD","CHUCK","FLASK", "SPARK", "KAFKA", "VALENBISI"]
+deliverables=["DOCKER","PYTHON","LINUX","NOTEBOOKS","AHORCADO","SQL","FLASK","KAFKA","SPARK","CLOUD","DEVSECOPS"]
+allowed=["DOCKER","PYTHON","LINUX","NOTEBOOKS","AHORCADO","SQL","README.MD","CHUCK","FLASK", "SPARK", "KAFKA", "VALENBISI","CLOUD","DEVSECOPS"]
+
 
 
 def check_class(folder_path):
@@ -33,7 +34,18 @@ def check_names(folder_path):
                 if element.upper() not in allowed:
                     print("File not allowed "+file_path+" Elment: "+element)
 
-
+def getcolor(element):
+    if element in ["DOCKER","PYTHON","LINUX","NOTEBOOKS","AHORCADO"]:
+        return "#dee2d0"
+    
+    if element in ["SQL","FLASK" ]:
+        return "#a5cbaa"
+    if element in [ "SPARK", "KAFKA"]:
+        return "#9bc99e"
+    if element in ["CLOUD","DEVSECOPS"]:
+        return "#779777"
+    else:
+        return "#ffc1b1"
 
 def generate_table(clase,alumnos):
     
@@ -41,14 +53,23 @@ def generate_table(clase,alumnos):
         table="<table>\n<tr><th>Alumno</th>"
         for element in deliverables:
             table+="\n<th>"+element+"</th>"
-        table+="\n</tr>\n"  
+        table+="\n</tr>\n"
+        table+="<tr>\n"
+        table+="<td> Modulos </td>\n"
+        table+="<td color='#dee2d0' style='text-align: center;font-weight: bold' colspan='5'> M0 - Fundamentos </td>\n"
+        table+="<td color='#a5cbaa' style='text-align: center;font-weight: bold' colspan='2'> M1.1 - Tratamiento Tradicional </td>\n"
+        table+="<td color='#9bc99e' style='text-align: center;font-weight: bold' colspan='2'> M1.2 - Streaming On Prem </td>\n"
+        table+="<td color='#779777' style='text-align: center;font-weight: bold' colspan='2'> M1.3 - Cloud Approach </td>\n"
+        table+="</tr>\n"
+        table+="<tr>\n"  
         for alumno in sorted(alumnos):
             table+="<tr>\n<td><a href='https://github.com/a10pepo/EDEM_MDA2324/tree/main/Alumnos/"+clase+"/"+alumno+"'>"+str.capitalize(alumno)+"</a></td>"
             for element in deliverables:
+                color=getcolor(element)
                 if alumnos[alumno][element]:
-                    table+="\n<td>✅</td>"
+                    table+="\n<td bgcolor='"+color+"'>✅</td>"
                 else:
-                    table+="\n<td>❌</td>"
+                    table+="\n<td bgcolor='"+color+"'>❌</td>"
             table+="\n</tr>\n"
         table+="</table>\n"
     except:
