@@ -1,0 +1,36 @@
+openapi: 3.0.0
+info:
+  title: Robot Temperature Sensor API
+  version: 1.0.0
+servers:
+- url: /
+paths:
+  /getLastMeassureBySensor/{sensor}:
+    get:
+      tags:
+      - Sensor
+      summary: Obtener la última medida del sensor por ID
+      operationId: get_last_meassure_by_sensor_sensor_get
+      parameters:
+      - name: sensor
+        in: path
+        description: ID del sensor
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Éxito al obtener la última medida
+          content:
+            application/json:
+              example:
+                message: Lógica para obtener la última medida por el sensor proporcionado
+        "400":
+          description: Sensor no encontrado
+        "404":
+          description: ID proporcionada no válida
+      x-openapi-router-controller: swagger_server.controllers.sensor_controller
+components: {}
+

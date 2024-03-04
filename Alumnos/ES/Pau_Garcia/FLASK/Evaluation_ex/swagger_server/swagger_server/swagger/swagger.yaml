@@ -1,0 +1,110 @@
+openapi: 3.0.3
+info:
+  title: Swagger Factory Robots Temperature Monitor - OpenAPI 3.0
+  description: "This is a sample Factory Robots temperature monitor based on the OpenAPI\
+    \ 3.0 specification.  You can find out more about\nSwagger at [https://swagger.io](https://swagger.io). "
+  contact:
+    email: pagaba@edem.es
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.11
+externalDocs:
+  description: Find out more about my projects on github
+  url: https://github.com/urtubia01
+servers:
+- url: http://localhost:8080/api/v3
+tags:
+- name: robots
+  description: Everything about your factory robots
+  externalDocs:
+    description: About me
+    url: http://linkedin.com/in/paugb
+paths:
+  /robots/addLastMeassureBySensor/{sensor_id}:
+    post:
+      tags:
+      - robots
+      summary: Add a new temperature record
+      description: Add a new temperature record for a specific sensor ID
+      operationId: add_temperature_record
+      parameters:
+      - name: sensor_id
+        in: path
+        description: ID of the sensor
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        description: Temperature record data
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Robot'
+        required: true
+      responses:
+        "201":
+          description: Successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Robot'
+        "400":
+          description: Bad request
+      x-openapi-router-controller: swagger_server.controllers.robots_controller
+  /robots/getLastTemperatureRecord/{sensor_id}:
+    get:
+      tags:
+      - robots
+      summary: Get temperature records for a specific sensor ID
+      description: Get the temperature records for a specific sensor ID
+      operationId: get_temperature_records
+      parameters:
+      - name: sensor_id
+        in: path
+        description: ID of the sensor
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: r_10
+      responses:
+        "200":
+          description: Successfully retrieved
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Robot'
+                x-content-type: application/json
+        "404":
+          description: Sensor not found
+      x-openapi-router-controller: swagger_server.controllers.robots_controller
+components:
+  schemas:
+    Robot:
+      type: object
+      properties:
+        sensor_id:
+          type: string
+          example: r_10
+        date:
+          type: string
+          format: date-time
+        unit:
+          type: string
+          example: fahrenheit degree
+        temperature:
+          type: number
+          format: float
+          example: 102.4
+      example:
+        sensor_id: r_10
+        date: 2000-01-23T04:56:07.000+00:00
+        unit: fahrenheit degree
+        temperature: 102.4
+

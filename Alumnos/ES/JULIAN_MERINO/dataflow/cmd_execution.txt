@@ -1,0 +1,31 @@
+# Running the vehicles
+
+python3.11 generator.py \
+    --project_id dataflow-edem \
+    --topic_name jumepe-dataflow-traffic \
+    --initial_coordinates 40.74989,-73.99391 \ # Madison Square Garden (NY Knicks Arena), NY
+    --final_coordinates 40.6833,-73.97517 # Barclays Center (Brooklyn Nets Arena), NY
+
+#Direct Runner (local)
+
+python3.11 EDEM_Dataflow_Streaming_Pipeline.py \
+    --project_id dataflow-edem \
+    --input_subscription projects/dataflow-edem/subscriptions/jumepe-dataflow-traffic-sub \
+    --output_topic projects/dataflow-edem/topics/jumepe-dataflow-nonfined \
+    --radar_id jumepe \
+    --cars_api https://europe-west1-long-flame-410209.cloudfunctions.net/car-license-plates-api
+
+#Dataflow Runner (Google Cloud)
+
+python3.11 EDEM_Dataflow_Streaming_Pipeline.py \
+    --project_id dataflow-edem \
+    --input_subscription projects/dataflow-edem/subscriptions/jumepe-dataflow-traffic-sub \
+    --output_topic projects/dataflow-edem/topics/jumepe-dataflow-nonfined \
+    --radar_id jumepe \         
+    --cars_api https://europe-west1-long-flame-410209.cloudfunctions.net/car-license-plates-api \
+    --runner DataflowRunner \
+    --job_name jumepe-dataflow \
+    --region europe-southwest1 \
+    --temp_location gs://jumepe-dataflow-traffic-bucket/tmp \
+    --staging_location gs://jumepe-dataflow-traffic-bucket/stg \
+    --requirements_file requirements.txt

@@ -1,0 +1,62 @@
+openapi: 3.0.3
+info:
+  title: Api información del sensor de los robots
+  description: Esta API nos proporciona la información almacenada en la base de datos
+    de la empresa Ejemplo de cada uno de sus sensores
+  version: 1.0.0
+servers:
+- url: "https://ejemploSL/sensor/getLastMeassureBySensor/{sensor}"
+tags:
+- name: sensor
+  description: Este endpoint maneja toda la información relacionada con un sensor
+paths:
+  /{sensor}:
+    get:
+      tags:
+      - sensor
+      summary: Obtiene la información almacenada de los datos de un sensor
+      operationId: sensor_get
+      parameters:
+      - name: sensor
+        in: path
+        description: Identificador del sensor
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: La información del sensor se obtuvo exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+        "400":
+          description: Error en la solicitud debido a datos faltantes o incorrectos
+        "404":
+          description: El sensor indicado no se encuentra
+      x-openapi-router-controller: swagger_server.controllers.sensor_controller
+components:
+  schemas:
+    inline_response_200:
+      type: object
+      properties:
+        code:
+          type: string
+          description: ID del sensor
+        fechamuestreo:
+          type: string
+          description: Fecha de muestreo
+        unidad:
+          type: string
+          description: Unidad de medida
+        medicion:
+          type: string
+          description: Valor de la medición
+      example:
+        unidad: unidad
+        medicion: medicion
+        code: code
+        fechamuestreo: fechamuestreo
+

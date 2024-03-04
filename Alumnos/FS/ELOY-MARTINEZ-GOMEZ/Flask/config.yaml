@@ -1,0 +1,45 @@
+swagger: '2.0'
+info:
+  version: 1.0
+  title: API de monitoreo Robot.
+  description: API para el monitoreo en tiempo real de datos industriales.
+paths:
+  /sensor/{sensor_id}/last-reading:
+    get:
+      summary: Última lectura del sensor
+      description: Devuelve la última lectura registrada por el sensor identificado por su ID único.
+      parameters:
+        - name: sensor_id
+          in: path
+          description: ID único del sensor.
+          required: true
+          type: string
+      responses:
+        200:
+          description: Última lectura obtenida exitosamente
+          schema:
+            $ref: '#/definitions/SensorReading'
+          examples:
+            application/json:
+              sensor_id: "sensor_02"
+              timestamp: "2024-01-30T12:00:00Z"
+              value: 15.5
+        404:
+          description: Sensor no encontrado
+          examples:
+            application/json:
+              error: "No se encontró el sensor especificado."
+definitions:
+  SensorReading:
+    type: object
+    properties:
+      sensor_id:
+        type: string
+        example: "sensor_02"
+      timestamp:
+        type: string
+        format: date-time
+        example: "2024-01-30T12:00:00Z"
+      value:
+        type: number
+        example: 15.5

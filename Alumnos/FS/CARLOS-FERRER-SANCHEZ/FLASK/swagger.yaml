@@ -1,0 +1,74 @@
+openapi: 3.0.0
+info:
+  title: Sensor Temperature API
+  description: API para monitorear la temperatura de un robot en tiempo real.
+  version: "1.0.0"
+
+paths:
+  /getLastMeasureBySensor/{sensor}:
+    get:
+      summary: Obtiene la última medición de un sensor específico.
+      parameters:
+        - name: sensor
+          in: path
+          required: true
+          schema:
+            type: string
+          description: El ID del sensor
+      responses:
+        '200':
+          description: Medición encontrada con éxito.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Measure'
+        '400':
+          description: ID del sensor no válido.
+        '404':
+          description: Sensor no encontrado.
+    post:
+      summary: Inserta una nueva medición para un sensor específico.
+      parameters:
+        - name: sensor
+          in: path
+          required: true
+          schema:
+            type: string
+          description: El ID del sensor para el que se inserta la medición
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Measure'
+      responses:
+        '200':
+          description: Nueva medición insertada con éxito.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Measure'
+        '400':
+          description: Datos de medición faltantes o ID del sensor no válido.
+components:
+  schemas:
+    Measure:
+      type: object
+      properties:
+        code:
+          type: string
+          description: ID del sensor.
+        fechamuestreo:
+          type: string
+          description: Fecha de la muestra.
+        unidad:
+          type: string
+          description: Unidad de la medición.
+        medicion:
+          type: number
+          description: Valor de la medición.
+      required:
+        - code
+        - fechamuestreo
+        - unidad
+        - medicion

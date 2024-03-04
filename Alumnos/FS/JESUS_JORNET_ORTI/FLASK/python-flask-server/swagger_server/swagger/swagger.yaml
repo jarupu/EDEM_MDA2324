@@ -1,0 +1,69 @@
+---
+swagger: "2.0"
+info:
+  description: "Esta API permite monitorear la temperatura de un robot en tiempo real,\
+    \ proporcionando acceso a las mediciones de temperatura guardadas en la base de\
+    \ datos."
+  version: "1.0.0"
+  title: "API de Monitoreo de Temperatura del Robot"
+  contact:
+    email: "soporte@tuempresa.com"
+host: "localhost:5000"
+basePath: "/v1"
+schemes:
+- "http"
+paths:
+  /getLastMeasureBySensor/{sensorId}:
+    get:
+      tags:
+      - "Mediciones"
+      summary: "Obtiene la última medición registrada por un sensor específico."
+      description: "Retorna la última medición de temperatura realizada por el sensor\
+        \ identificado por `sensorId`."
+      operationId: "get_last_measure_by_sensor"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "sensorId"
+        in: "path"
+        description: "El identificador único del sensor."
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "Medición encontrada exitosamente."
+          schema:
+            $ref: "#/definitions/Medicion"
+        "400":
+          description: "Formato inválido del ID del sensor."
+        "404":
+          description: "Sensor no encontrado."
+      x-swagger-router-controller: "swagger_server.controllers.mediciones_controller"
+definitions:
+  Medicion:
+    type: "object"
+    required:
+    - "code"
+    - "fechamuestreo"
+    - "medicion"
+    - "unidad"
+    properties:
+      code:
+        type: "string"
+        description: "El identificador único del sensor."
+      fechamuestreo:
+        type: "string"
+        description: "La fecha y hora en la que se realizó la medición."
+      unidad:
+        type: "string"
+        description: "La unidad de medida de la temperatura (por ejemplo, Celsius,\
+          \ Fahrenheit)."
+      medicion:
+        type: "number"
+        format: "float"
+        description: "El valor de la medición de temperatura."
+    example:
+      unidad: "unidad"
+      medicion: 0.8008282
+      code: "code"
+      fechamuestreo: "fechamuestreo"

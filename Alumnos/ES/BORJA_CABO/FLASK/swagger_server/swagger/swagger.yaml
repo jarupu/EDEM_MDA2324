@@ -1,0 +1,55 @@
+openapi: 3.0.0
+info:
+  title: API del Robot
+  description: En una empresa industrial, tenemos  un sensor que monitorea la temperatura de un robot en tiempo real y la almacenamos en una base de datos.
+  version: 1.0.0
+servers:
+- url: /
+paths:
+  /getLastMeasureBySensor/{sensor}:
+    get:
+      summary: Get the last temperature measurement for sensor.
+      operationId: get_last_measure_by_sensor_get
+      parameters:
+      - name: sensor
+        in: path
+        description: ID of the sensor
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Robot'
+        "400":
+          description: Sensor not found
+        "404":
+          description: Invalid ID supplied
+      x-openapi-router-controller: swagger_server.controllers.robot_controller
+components:
+  schemas:
+    Robot:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "11"
+        fechamuestreo:
+          type: string
+          example: 26/10/2023
+        unidad:
+          type: string
+          example: "Celsius"
+        medicion:
+          type: number
+          example: 45
+      example:
+        unidad: "Celsius"
+        medicion: 45
+        id: "11" 
+        fechamuestreo: 26/10/2023

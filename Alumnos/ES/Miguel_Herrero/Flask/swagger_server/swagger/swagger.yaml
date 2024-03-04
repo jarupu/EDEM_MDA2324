@@ -1,0 +1,60 @@
+---
+swagger: '2.0'
+info:
+  title: API de Monitoreo de Temperatura de Robots
+  description: Ejercicio sobre la creación de una API para monitorear la temperatura de un robot
+  version: 1.0.0
+
+paths:
+  /getLastMeassureBySensor/{sensor}:
+    get:
+      summary: Obtener la última medición de temperatura por ID de sensor
+      parameters:
+        - in: path
+          name: sensor
+          required: true
+          description: El ID del sensor
+          type: string
+      responses:
+        '200':
+          description: Respuesta exitosa
+          schema:
+            type: object
+            properties:
+              code:
+                type: string
+              fechamuestreo:
+                type: string
+              unidad:
+                type: string
+              medicion:
+                type: number
+          examples:
+            example-1:
+              value:
+                code: "sensor123"
+                fechamuestreo: "2024-01-09T12:00:00Z"
+                unidad: "Celsius"
+                medicion: 25.5
+        '400':
+          description: Sensor no encontrado
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+          examples:
+            example-1:
+              value:
+                error: Sensor no encontrado
+        '404':
+          description: ID inválido suministrado
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+          examples:
+            example-1:
+              value:
+                error: ID inválido suministrado
