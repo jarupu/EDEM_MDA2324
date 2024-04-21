@@ -1,0 +1,13 @@
+# Use the official Python image as base
+FROM python:3.8-slim
+
+# Set the working directory
+WORKDIR /app
+
+# Copy the necessary files
+COPY producer.py requirements.txt sensor.json ./
+
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+CMD ["python", "producer.py"]

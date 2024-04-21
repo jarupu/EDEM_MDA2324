@@ -1,0 +1,1 @@
+Hola Javi, lo he inteado de todas las maneras pero me da error al correr el artifact repository y también me salen errores en el dataflow, pero parecen estar relacionados con el código y no se como corregirlo.

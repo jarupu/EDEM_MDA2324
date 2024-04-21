@@ -1,0 +1,20 @@
+Córdoba
+Valladolid
+Alicante
+Palma de Mallorca
+Elche
+La Coruña
+Las Palmas de Gran Canaria
+Bilbao
+Hospitalet de Llobregat
+Gijón
+Barcelona
+Murcia
+Zaragoza
+Madrid
+Valencia
+Sevilla
+Vigo
+Málaga
+Vitoria
+Granada

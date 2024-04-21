@@ -1,0 +1,81 @@
+openapi: 3.0.3
+info:
+  title: Robot Temperature Monitoring API
+  description: "# Evaluation Exercise - Create your first API using swagger\nImagine\
+    \ that you work for an industry company where there is a robot. \nWe have a sensor\
+    \ that is monitoring the temperature of the robot in real-time. The measurement\
+    \ is saved into a database.\nSensor Info:\n- id del sensor - string\n- fechamuestreo\
+    \ - string\n- unidad - string\n- medicion - number\n\nOur API needs to provide\
+    \ the following methods:\n> /getLastMeasureBySensor/{sensor}:\n  sensor -> string\n\
+    \  \nWhen the method is successful, it should return:\nMeasure\n- code (id del\
+    \ sensor) - string\n- fechamuestreo - string\n- unidad - string\n- medicion -\
+    \ number\n\nWhen the method is not successful, it should return:\n404 -> Invalid\
+    \ ID supplied\n400 -> Sensor not found"
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.11
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+- url: /
+tags:
+- name: sensor
+  description: Operations related to robot temperature sensors
+  externalDocs:
+    description: Find out more
+    url: http://swagger.io
+paths:
+  /getLastMeasureBySensor/{sensor}:
+    get:
+      tags:
+      - sensor
+      summary: Get the last temperature measure by sensor ID
+      description: Retrieve the latest temperature measurement for a given sensor
+        ID
+      operationId: get_last_measure_by_sensor
+      parameters:
+      - name: sensor
+        in: path
+        description: Sensor ID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Measure'
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Sensor not found
+      x-openapi-router-controller: swagger_server.controllers.sensor_controller
+components:
+  schemas:
+    Measure:
+      type: object
+      properties:
+        code:
+          type: string
+        fechamuestreo:
+          type: string
+        unidad:
+          type: number
+        medicion:
+          type: number
+      example:
+        code: user
+        fechamuestreo: fechamuestreo
+        unidad: unidad
+        medicion: 0.75
+
+

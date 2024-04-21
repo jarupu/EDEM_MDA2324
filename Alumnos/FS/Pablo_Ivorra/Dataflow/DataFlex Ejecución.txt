@@ -1,0 +1,15 @@
+#Creación de DataFlex
+
+gcloud dataflow flex-template build gs://bucketnewyorktaxis/nyc-taxi-dataflow-template.json \
+    --image-gcr-path "europe-west1-docker.pkg.dev/jbg-edem/newyorktaxirepo/nyc-taxi-dataflow-img:latest" \
+    --sdk-language "PYTHON" \
+    --flex-template-base-image "PYTHON3" \
+    --py-path "." \
+    --env "FLEX_TEMPLATE_PYTHON_PY_FILE=gs://bucketnewyorktaxis/Dataflow.py" \
+    --env "FLEX_TEMPLATE_PYTHON_REQUIREMENTS_FILE=gs://bucketnewyorktaxis/requirements.txt"
+#Run DataFlow template
+gcloud dataflow flex-template run "nyc-taxi-dataflow-job" \
+ --template-file-gcs-location="gs://bucketnewyorktaxis/nyc-taxi-dataflow-template.json" \
+ --parameters project_id="jbg-edem",input_subscription="projects/jbg-edem/subscriptions/newyorktaxi2-sub",output_topic="projects/jbg-edem/topics/newyorktaxi2",radar_id="ivo2",cars_api="https://europe-west1-long-flame-410209.cloudfunctions.net/car-license-plates-api" \
+ --region=europe-west1 \
+ --max-workers=1

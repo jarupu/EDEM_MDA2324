@@ -1,0 +1,270 @@
+{
+    "fighters": [
+        {
+            "name": "Khabib Nurmagomedov",
+            "wins": "29",
+            "loses": "0",
+            "country": "Russia",
+            "endings": "8"
+        },
+        {
+            "name": "Jon Jones",
+            "wins": "26",
+            "loses": "1",
+            "country": "United States",
+            "endings": "10"
+        },
+        {
+            "name": "Georges St-Pierre",
+            "wins": "26",
+            "loses": "2",
+            "country": "Canada",
+            "endings": "8"
+        },
+        {
+            "name": "Anderson Silva",
+            "wins": "34",
+            "loses": "11",
+            "country": "Brazil",
+            "endings": "23"
+        },
+        {
+            "name": "Demetrious Johnson",
+            "wins": "30",
+            "loses": "3",
+            "country": "United States",
+            "endings": "5"
+        },
+        {
+            "name": "Max Holloway",
+            "wins": "21",
+            "loses": "6",
+            "country": "United States",
+            "endings": "10"
+        },
+        {
+            "name": "Conor McGregor",
+            "wins": "22",
+            "loses": "5",
+            "country": "Ireland",
+            "endings": "19"
+        },
+        {
+            "name": "Daniel Cormier",
+            "wins": "22",
+            "loses": "3",
+            "country": "United States",
+            "endings": "10"
+        },
+        {
+            "name": "Jose Aldo",
+            "wins": "28",
+            "loses": "7",
+            "country": "Brazil",
+            "endings": "17"
+        },
+        {
+            "name": "TJ Dillashaw",
+            "wins": "16",
+            "loses": "4",
+            "country": "United States",
+            "endings": "9"
+        },
+        {
+            "name": "Stipe Miocic",
+            "wins": "20",
+            "loses": "4",
+            "country": "United States",
+            "endings": "15"
+        },
+        {
+            "name": "Nate Diaz",
+            "wins": "20",
+            "loses": "12",
+            "country": "United States",
+            "endings": "11"
+        },
+        {
+            "name": "Dominick Cruz",
+            "wins": "22",
+            "loses": "3",
+            "country": "United States",
+            "endings": "9"
+        },
+        {
+            "name": "Frankie Edgar",
+            "wins": "23",
+            "loses": "8",
+            "country": "United States",
+            "endings": "7"
+        },
+        {
+            "name": "Cain Velasquez",
+            "wins": "14",
+            "loses": "3",
+            "country": "United States",
+            "endings": "12"
+        },
+        {
+            "name": "Randy Couture",
+            "wins": "19",
+            "loses": "11",
+            "country": "United States",
+            "endings": "11"
+        },
+        {
+            "name": "Chuck Liddell",
+            "wins": "21",
+            "loses": "8",
+            "country": "United States",
+            "endings": "13"
+        },
+        {
+            "name": "Rampage Jackson",
+            "wins": "38",
+            "loses": "14",
+            "country": "United States",
+            "endings": "20"
+        },
+        {
+            "name": "Michael Bisping",
+            "wins": "30",
+            "loses": "9",
+            "country": "United Kingdom",
+            "endings": "16"
+        },
+        {
+            "name": "Vitor Belfort",
+            "wins": "26",
+            "loses": "14",
+            "country": "Brazil",
+            "endings": "18"
+        },
+        {
+            "name": "Wanderlei Silva",
+            "wins": "35",
+            "loses": "14",
+            "country": "Brazil",
+            "endings": "27"
+        },
+        {
+            "name": "Rich Franklin",
+            "wins": "29",
+            "loses": "7",
+            "country": "United States",
+            "endings": "14"
+        },
+        {
+            "name": "Urijah Faber",
+            "wins": "34",
+            "loses": "11",
+            "country": "United States",
+            "endings": "17"
+        },
+        {
+            "name": "Renan Barao",
+            "wins": "34",
+            "loses": "9",
+            "country": "Brazil",
+            "endings": "15"
+        },
+        {
+            "name": "Eddie Alvarez",
+            "wins": "30",
+            "loses": "7",
+            "country": "United States",
+            "endings": "21"
+        },
+        {
+            "name": "Tony Ferguson",
+            "wins": "25",
+            "loses": "5",
+            "country": "United States",
+            "endings": "12"
+        },
+        {
+            "name": "Brian Ortega",
+            "wins": "14",
+            "loses": "1",
+            "country": "United States",
+            "endings": "3"
+        },
+        {
+            "name": "Robert Whittaker",
+            "wins": "23",
+            "loses": "5",
+            "country": "Australia",
+            "endings": "10"
+        },
+        {
+            "name": "Israel Adesanya",
+            "wins": "20",
+            "loses": "1",
+            "country": "Nigeria",
+            "endings": "15"
+        },
+        {
+            "name": "Kamaru Usman",
+            "wins": "17",
+            "loses": "1",
+            "country": "Nigeria",
+            "endings": "8"
+        },
+        {
+            "name": "Tyron Woodley",
+            "wins": "19",
+            "loses": "5",
+            "country": "United States",
+            "endings": "7"
+        },
+        {
+            "name": "Colby Covington",
+            "wins": "16",
+            "loses": "2",
+            "country": "United States",
+            "endings": "6"
+        },
+        {
+            "name": "Robbie Lawler",
+            "wins": "28",
+            "loses": "15",
+            "country": "United States",
+            "endings": "20"
+        },
+        {
+            "name": "Stephen Thompson",
+            "wins": "16",
+            "loses": "4",
+            "country": "United States",
+            "endings": "7"
+        },
+        {
+            "name": "Jorge Masvidal",
+            "wins": "35",
+            "loses": "14",
+            "country": "United States",
+            "endings": "16"
+        },
+        {
+            "name": "Leon Edwards",
+            "wins": "18",
+            "loses": "3",
+            "country": "Jamaica",
+            "endings": "6"
+        },
+        {
+            "name": "Donald Cerrone",
+            "wins": "36",
+            "loses": "15",
+            "country": "United States",
+            "endings": "27"
+        },
+        {
+            "name": "Justin Gaethje",
+            "wins": "22",
+            "loses": "3",
+            "country": "United States",
+            "endings": "19"
+        }
+    ]
+}

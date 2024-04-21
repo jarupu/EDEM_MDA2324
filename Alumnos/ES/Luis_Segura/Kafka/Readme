@@ -1,0 +1,9 @@
+# Para este entregable, lo primero que he hecho ha sido seleccionar un dataset de la web de Kaggle, en este caso, uno de Ramen: (https://www.kaggle.com/datasets/residentmario/ramen-ratings?resource=download)
+
+# Tras analizarlo y descargarlo, lo abrí en Visual Studio y ya estaba formateado en formato .CSV
+
+# El siguiente paso fue crear y ejecutar el docker-compose up. Una vez hecho, abrí el puerto 8080 en Google y accedí a Kafka UI.
+
+# Una vez establecida la UI, cree ambos producer.py y consumer.py, comprobando que los mensajes llegan y se leen el topic creado en Kafka UI.
+
+# Por último, se hizo una petición (query) y se comprobó que los datos se generaban de forma correcta y se proporcionaban los datos deseados.

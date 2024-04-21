@@ -1,0 +1,25 @@
+python3 DataflowLocal.py \
+    --project_id jbg-edem \
+    --input_subscription projects/jbg-edem/subscriptions/newyorktaxi2-sub \
+    --output_topic projects/jbg-edem/topics/newyorktaxi2 \
+    --radar_id ivo2 \
+    --cars_api https://europe-west1-long-flame-410209.cloudfunctions.net/car-license-plates-api \
+    --runner DataflowRunner \
+    --job_name entrega-dataflow-js8 \
+    --region europe-west1 \
+    --temp_location gs://bucketnewyorktaxis/tmp \
+    --staging_location gs://bucketnewyorktaxis/stg \
+    --requirements_file requirements.txt
+    --table_reference jbg-edem:Matriculas.traffic_data
+
+
+#Generador
+
+cd /02_Code
+
+    python3 Generator.py \
+    --project_id jbg-edem \
+    --topic_name newyorktaxi2 \
+    --initial_coordinates "40.7128, -74.0060" \
+    --final_coordinates "40.730610, -73.935242"
+

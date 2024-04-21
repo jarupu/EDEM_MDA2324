@@ -1,0 +1,11 @@
+# PostWork Kafka:
+Para este trabajo he escogido un dataset de Kaggle con datos sobre la población de Reino Unido, que se centra en analizar los determinantes que hacen que un individuo fume o no.
+Este dataset tiene datos como edad, estado marital (casado, soltero, divorciado, viudo...), rangos de ingresos brutos, region etc...
+
+Para empezar con nuestro analisis de esta base de datos hay que configurar el script "producer", que creará el topic y producirá los mensajes; y "consumer", que lee los mensajes del topic creado y los filtra por (smoke = yes).
+
+Comandos usados.
+Levantar los contenedores: docker-compose up -d
+Iniciar KSQL: docker-compose exec ksql-cli ksql http://host.docker.internal:8088
+
+Proceso en imágenes en carpeta capturas.
