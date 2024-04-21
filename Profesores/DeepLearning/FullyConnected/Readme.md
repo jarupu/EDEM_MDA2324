@@ -1,0 +1,1 @@
+Los alumnos deberán completar el entregable disponible. El objetivo del notebook se encuentra detallado al inicio.
